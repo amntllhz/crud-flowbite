@@ -79,4 +79,17 @@ function update($dataUp) {
     return mysqli_affected_rows($conn);
 
 }
+
+
+// filter data
+function filter($dataFilter) {
+    if ($dataFilter['kelas'] === 'All') {
+        $query = "SELECT * FROM datamhs"; // Ambil semua data
+    } else {
+        $query = "SELECT * FROM datamhs WHERE kelas = '" . htmlspecialchars($dataFilter['kelas']) . "'";
+    }
+    return query($query);
+}
+
+
 ?>
