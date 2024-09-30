@@ -51,4 +51,32 @@ function hapus($dataNim) {
     return mysqli_affected_rows($conn);
 }
 
+
+// update
+function update($dataUp) {
+
+    // ambil data form
+    global $conn;
+    $nim = htmlspecialchars($dataUp["nim"]);
+    $nama = htmlspecialchars($dataUp["nama"]);
+    $prodi = htmlspecialchars($dataUp["prodi"]);
+    $kelas = htmlspecialchars($dataUp["kelas"]);
+    $email = htmlspecialchars($dataUp["email"]);
+
+    // query insert
+    $query =    "UPDATE datamhs SET
+                    nim = '$nim',
+                    nama = '$nama',
+                    prodi = '$prodi',
+                    kelas = '$kelas',
+                    email = '$email'
+                WHERE nim = '$nim'
+                ";
+
+    mysqli_query($conn, $query);
+
+    // cek apakah data berhasil diupdate
+    return mysqli_affected_rows($conn);
+
+}
 ?>
