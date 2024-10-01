@@ -91,5 +91,21 @@ function filter($dataFilter) {
     return query($query);
 }
 
+// search data
+function search($dataSearch) {
+    $query = "SELECT * FROM datamhs WHERE
+
+    nim LIKE '%" . htmlspecialchars($dataSearch['search']) . "%' OR
+    nama LIKE '%" . htmlspecialchars($dataSearch['search']) . "%' OR
+    prodi LIKE '%" . htmlspecialchars($dataSearch['search']) . "%'
+        
+     ";
+
+
+    // return query
+    return query($query);
+}
+
+
 
 ?>
