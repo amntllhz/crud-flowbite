@@ -81,17 +81,19 @@ if (isset($_POST['search-data'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
-<body>
+<body class="font-in font-feature-settings-cv11">
     <!-- Start block -->
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased mt-20">
-        <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+
+        <div class="mx-auto max-w-6xl px-4 lg:px-12">
 
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-visible">
 
-                <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                    <div class="w-full md:w-1/2">
+                <div class="flex flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                    <div class="max-w-2xl w-full">
                         <form action="" method="post" class="flex items-center space-x-4">
                             <label for="search" class="sr-only">Search</label>
                             <div class="relative w-full">
@@ -112,8 +114,7 @@ if (isset($_POST['search-data'])) {
                         </form>
                     </div>
 
-
-                    <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">                        
+                    <div class="max-w-md flex flex-col space-y-2 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">                        
 
                         <div class="flex items-center space-x-3 w-full md:w-auto">
 
@@ -183,9 +184,7 @@ if (isset($_POST['search-data'])) {
                 <!-- table -->
 
                 <div class="overflow-x-auto">
-
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">                        
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-4">NIM</th>
@@ -193,12 +192,12 @@ if (isset($_POST['search-data'])) {
                                 <th scope="col" class="px-4 py-3">Program Studi</th>
                                 <th scope="col" class="px-4 py-3">Kelas</th>
                                 <th scope="col" class="px-4 py-3">Email</th>
+                                <th scope="col" class="px-4 py-3 hidden">Gambar</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
                             </tr>
                         </thead>
-
                         <tbody>
 
                             <?php foreach ($mahasiswa as $row) : ?>
@@ -208,6 +207,7 @@ if (isset($_POST['search-data'])) {
                                 <td class="px-4 py-3"><?=$row['prodi']?></td>
                                 <td class="px-4 py-3 max-w-[12rem] truncate"><?=$row['kelas']?></td>
                                 <td class="px-4 py-3"><?=$row['email']?></td>
+                                <td class="px-4 py-3 hidden"><?=$row['gambar']?></td>
                                 <td class="px-4 py-3 flex items-center justify-end">
                                     
                                     <?php $dropdownId = "dropdown-{$row['nim']}"; ?>
@@ -343,8 +343,7 @@ if (isset($_POST['search-data'])) {
                                         <!-- Modal header -->
                                         <div class="flex justify-between mb-4 rounded-t sm:mb-5">
                                             <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-                                                <h3 class="font-semibold "><?=$row['nama']?></h3>
-                                                <p class="font-bold"><?=$row['nim']?></p>
+                                                <h3 class="font-semibold ">Data Mahasiswa</h3>                                                
                                             </div>
                                             <div>
                                                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="<?=$modalPreviewId?>">
@@ -355,12 +354,25 @@ if (isset($_POST['search-data'])) {
                                                 </button>
                                             </div>
                                         </div>
-                                        <dl>
-                                            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Program Studi</dt>
-                                            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400"><?=$row['prodi']?></dd>
-                                            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">E-mail</dt>
-                                            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400"><?=$row['email']?></dd>
-                                        </dl>
+
+                                        <!-- Modal body -->
+                                        <div class="flex mb-4 justify-between gap-x-4">
+
+                                            <div class="flex w-fit sm:mx-auto">
+                                                <img class="pointer-events-none w-56 p-4 bg-blue-100 rounded-xl sm:mb-2 sm:w-52" src="../img/<?=$row['gambar']?>" alt="">
+                                            </div>                                                                        
+
+                                            <div class="flex flex-col text-left w-full max-w-xs">
+                                                <h2 class="text-xl font-bold text-indigo-950 mb-1"><?=$row['nama']?></h2>
+                                                <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-prim ring-1 ring-inset ring-prim/10 w-fit"><?=$row['nim']?></span>                                                   
+                                                <div class="mt-2 mb-2">
+                                                    <p class="text-sm text-gray-500"><?=$row['prodi']?></p>                          
+                                                    <p class="text-sm text-gray-500">Kelas <?=$row['kelas']?></p>                            
+                                                    <p class="text-sm text-gray-500"><?=$row['email']?></p>                            
+                                                </div>                                                                               
+                                            </div> 
+                                        </div>
+
                                         <div class="flex justify-between items-center">                                            
                                             <button type="button" class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
                                                 <svg aria-hidden="true" class="w-5 h-5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -376,7 +388,6 @@ if (isset($_POST['search-data'])) {
 
                             <?php endforeach; ?>                   
                         </tbody>
-
                     </table>
                 </div>
 
@@ -491,7 +502,7 @@ if (isset($_POST['search-data'])) {
             </div>
 
             <!-- Modal body -->
-            <form action="" method="post" class="p-4 md:p-5">
+            <form action="" method="post" class="p-4 md:p-5" enctype="multipart/form-data">
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIM</label>
@@ -518,7 +529,7 @@ if (isset($_POST['search-data'])) {
                     </div>
                     <div class="col-span-2">                        
                         <label for="gambar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload file</label>
-                        <input id="gambar" name="gambar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-white focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
+                        <input id="gambar" name="gambar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
                     </div>                    
                 </div>
                 <button name="insert-data" type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
