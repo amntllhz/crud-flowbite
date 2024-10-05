@@ -8,7 +8,8 @@ if (isset($_POST['register'])) {
 
     if (register($_POST) > 0) {
         echo "<script>
-                alert('user baru berhasil ditambahkan!');        
+                alert('user baru berhasil ditambahkan!');
+                document.location.href = 'login.php';      
             </script>";
     } else {
         echo mysqli_error($conn);
@@ -34,7 +35,7 @@ if (isset($_POST['register'])) {
                 <div class="grid grid-cols-2 gap-x-4">
                     <div class="mb-5">
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                        <input name="username" type="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Username" required />
+                        <input name="username" type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Username" required />
                     </div>
                     <div class="mb-5">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
@@ -59,5 +60,8 @@ if (isset($_POST['register'])) {
             </form>
         </div>
     </section>
+
+
+    <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 </body>
 </html>

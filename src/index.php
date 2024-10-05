@@ -85,6 +85,9 @@ if (isset($_POST['logout'])) {
     // stop session
     session_destroy();
 
+    // remove cookie
+    setcookie('key', '', time() - 3600);
+
     // redirect
     header("Location: login.php");
     exit;
