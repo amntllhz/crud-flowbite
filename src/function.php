@@ -238,6 +238,7 @@ function register($dataReg) {
 
     // cek apakah data berhasil ditambahkan
     return mysqli_affected_rows($conn);
-}   
+}
+
 
 ?>
