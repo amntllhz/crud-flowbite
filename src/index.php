@@ -269,8 +269,12 @@ if (isset($_POST['search-data'])) {
                                             </button>
                                         </div>
                                         <!-- Modal body -->
-                                        <form action="" method="post">
-                                            <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                                        <form action="" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" name="gambarLama" value="<?= $row['gambar'] ?>">
+                                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                                <div class="col-span-2 w-full">
+                                                    <img class="w-32 h-32 mx-auto bg-slate-100 rounded-xl" src="../img/<?= $row['gambar'] ?>" alt="">
+                                                </div>
                                                 <div>
                                                     <label for="nim" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIM</label>
                                                     <input type="text" name="nim" id="nim" value="<?= $row['nim'] ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Ex. Apple iMac 27&ldquo;">
@@ -294,7 +298,11 @@ if (isset($_POST['search-data'])) {
                                                 <div>
                                                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                                     <input type="text" value="<?= $row['email'] ?>" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$299">
-                                                </div> 
+                                                </div>
+                                                <div class="">                                                    
+                                                    <label for="gambar" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload file</label>
+                                                    <input id="gambar" name="gambar" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
+                                                </div>  
                                             </div>
                                             <div class="flex space-x-4">                                            
                                                 <button name="update-data" id="update-data" type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

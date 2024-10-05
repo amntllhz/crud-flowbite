@@ -25,6 +25,14 @@ function tambah($data) {
     $kelas = htmlspecialchars($data["kelas"]);
     $email = htmlspecialchars($data["email"]);
 
+    // apakah data sudah ada di database
+    $result = mysqli_query($conn, "SELECT * FROM datamhs WHERE nim = '$nim'");
+    if (mysqli_fetch_assoc($result)) {
+        echo "<script>
+                alert('data sudah ada!');
+                </script>";
+        return false;
+    }
 
     $gambar = upload();
     if (!$gambar) {
@@ -124,7 +132,7 @@ function hapus($dataNim) {
 }
 
 
-// update
+//function update
 function update($dataUp) {
 
     // ambil data form
@@ -134,6 +142,20 @@ function update($dataUp) {
     $prodi = htmlspecialchars($dataUp["prodi"]);
     $kelas = htmlspecialchars($dataUp["kelas"]);
     $email = htmlspecialchars($dataUp["email"]);
+    $gambarLama = htmlspecialchars($dataUp["gambarLama"]);
+
+    // cek apakah user pilih gambar baru
+    if ($_FILES['gambar']['error'] === 4) {
+        $gambar = $gambarLama;
+    } else {
+        $gambar = upload();
+
+        // hapus gambar lama
+        $file = "../img/" . $gambarLama;
+        if (file_exists($file)) {
+            unlink($file);
+        }
+    }
 
     // query insert
     $query =    "UPDATE datamhs SET
@@ -141,7 +163,8 @@ function update($dataUp) {
                     nama = '$nama',
                     prodi = '$prodi',
                     kelas = '$kelas',
-                    email = '$email'
+                    email = '$email',
+                    gambar = '$gambar'
                 WHERE nim = '$nim'
                 ";
 
