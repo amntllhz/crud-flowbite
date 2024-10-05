@@ -90,8 +90,6 @@ function upload() {
     move_uploaded_file($tmpName, '../img/' . $namaFileBaru);
 
     return $namaFileBaru;
-
-
 }
 
 
@@ -102,12 +100,27 @@ function hapus($dataNim) {
     // ambil data
     global $conn;
     $nim = htmlspecialchars($dataNim["nim"]);
+    $gambar = htmlspecialchars($dataNim["gambar"]);
+    $file = "../img/" . $gambar;
+
+    // Hapus gambar hanya jika data berhasil dihapus
+    if (file_exists($file)) {
+        unlink($file);
+    } else {
+        echo "
+                <script>
+                     alert('data gagal dihapus!');
+                </script>";
+
+        return false;        
+    }
 
     $query = "DELETE FROM datamhs WHERE nim = '$nim'";
     mysqli_query($conn, $query);
 
     // cek apakah data berhasil dihapus
     return mysqli_affected_rows($conn);
+
 }
 
 
