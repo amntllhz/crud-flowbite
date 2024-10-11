@@ -178,12 +178,21 @@ function update($dataUp) {
 
 // filter data
 function filter($dataFilter) {
-    if ($dataFilter['kelas'] === 'All') {
-        $query = "SELECT * FROM datamhs"; // Ambil semua data
-    } else {
+
+
+    $kelas = htmlspecialchars($dataFilter['kelas']);
+
+    if ($dataFilter['kelas'] === $kelas) {
+        
         $query = "SELECT * FROM datamhs WHERE kelas = '" . htmlspecialchars($dataFilter['kelas']) . "'";
+
+        return query($query);
+
+    } else {
+
+        return null;
     }
-    return query($query);
+    
 }
 
 // search data

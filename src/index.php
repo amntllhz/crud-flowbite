@@ -12,8 +12,8 @@ if (!isset($_SESSION['login'])) {
 // require
 require 'function.php';
 
-// pagination
-// konfigurasi
+
+// Konfigurasi default
 $jumlahDataPerHalaman = 3;
 $jumlahData = count(query("SELECT * FROM datamhs"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
@@ -21,8 +21,21 @@ $halamanAktif = (isset($_GET['halaman'])) ? $_GET['halaman'] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 
-// ambil data dari tabel
-$mahasiswa = query("SELECT * FROM datamhs LIMIT $awalData, $jumlahDataPerHalaman");
+// Filter data dari modal-filter
+if (isset($_POST['filter-data'])) {
+    $dataFiltered = filter($_POST);
+    
+    if ($dataFiltered) {
+        $mahasiswa = $dataFiltered; // Tampilkan data berdasarkan filter
+    } else {
+        // Kembali ke data default jika tidak ada filter yang valid
+        $mahasiswa = query("SELECT * FROM datamhs LIMIT $awalData, $jumlahDataPerHalaman");
+    }
+} else {
+    // Jika tidak ada filter, ambil data default
+    $mahasiswa = query("SELECT * FROM datamhs LIMIT $awalData, $jumlahDataPerHalaman");
+}
+
 
 // ambil data insert-modal
 if (isset($_POST['insert-data'])) {
@@ -77,10 +90,10 @@ if (isset($_POST['update-data'])) {
 }
 
 // filter data dari modal-filter
-if (isset($_POST['filter-data'])) {
+// if (isset($_POST['filter-data'])) {
 
-    $mahasiswa = filter($_POST);
-}
+//     $mahasiswa = filter($_POST);
+// }
 
 // search data dari search
 if (isset($_POST['search-data'])) {
