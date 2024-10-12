@@ -25,7 +25,7 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 if (isset($_POST['filter-data'])) {
     $dataFiltered = filter($_POST);
     
-    if ($dataFiltered) {
+    if ($dataFiltered !== null) {
         $mahasiswa = $dataFiltered['data'];
         $jumlahData = $dataFiltered['jumlahData'];        
         $jumlahHalaman = $dataFiltered['jumlahHalaman'];

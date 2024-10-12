@@ -184,28 +184,26 @@ function filter($dataFilter) {
     $jumlahDataPerHalaman = htmlspecialchars($dataFilter['jumlahDataPerHalaman']);
     $halamanAktif = htmlspecialchars($dataFilter['halamanAktif']);
 
-    if ($dataFilter['kelas'] === $kelas) {
 
-        $jumlahData = count(query("SELECT * FROM datamhs WHERE kelas = '$kelas'"));
-        $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
-        $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
-        
-        $query = "SELECT * FROM datamhs WHERE kelas = '$kelas' LIMIT $awalData, $jumlahDataPerHalaman";
-
-        $data = query($query);
-
-
-        return [
-            'data' => $data,
-            'jumlahData' => $jumlahData,
-            'jumlahHalaman' => $jumlahHalaman
-        ];
-
-    } else {
-
+    if ($dataFilter['kelas'] === 'All') {
         return null;
-    }
+    }    
+
+    $jumlahData = count(query("SELECT * FROM datamhs WHERE kelas = '$kelas'"));
+    $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+    $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
     
+    $query = "SELECT * FROM datamhs WHERE kelas = '$kelas' LIMIT $awalData, $jumlahDataPerHalaman";
+
+    $data = query($query);
+
+
+    return [
+        'data' => $data,
+        'jumlahData' => $jumlahData,
+        'jumlahHalaman' => $jumlahHalaman
+    ];
+
 }
 
 // search data
