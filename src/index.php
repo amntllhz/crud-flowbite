@@ -26,7 +26,9 @@ if (isset($_POST['filter-data'])) {
     $dataFiltered = filter($_POST);
     
     if ($dataFiltered) {
-        $mahasiswa = $dataFiltered; // Tampilkan data berdasarkan filter
+        $mahasiswa = $dataFiltered['data'];
+        $jumlahData = $dataFiltered['jumlahData'];        
+        $jumlahHalaman = $dataFiltered['jumlahHalaman'];
     } else {
         // Kembali ke data default jika tidak ada filter yang valid
         $mahasiswa = query("SELECT * FROM datamhs LIMIT $awalData, $jumlahDataPerHalaman");
@@ -236,7 +238,11 @@ if (isset($_POST['logout'])) {
                                         <li class="flex items-center">
                                             <input value="Malam" name="kelas" id="malam" type="radio" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                             <label for="malam" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Malam</label>
-                                        </li>                                    
+                                        </li>
+                                        <li class="flex items-center">
+                                            <input type="hidden" name="jumlahDataPerHalaman" id="jumlahDataPerHalaman" value="<?= $jumlahDataPerHalaman ?>">                                            
+                                            <input type="hidden" name="halamanAktif" id="halamanAktif" value="<?= $halamanAktif ?>">                                            
+                                        </li>                          
                                     </ul>
                                     <button name="filter-data" id="filter-data" type="submit" class="mt-3 text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
