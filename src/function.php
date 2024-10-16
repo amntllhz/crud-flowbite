@@ -1,7 +1,7 @@
 <?php
 
 // koneksi database
-$conn = mysqli_connect("localhost", "root", "", "mahasiswa");
+$conn = mysqli_connect("localhost", "root", "", "mahacrud");
 
 // function query
 function query($query)
