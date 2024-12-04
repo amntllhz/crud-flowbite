@@ -481,9 +481,9 @@ if (isset($_POST['logout'])) {
                 <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                         Showing
-                        <span class="font-semibold text-gray-900 dark:text-white"><?= $jumlahDataPerHalaman ?></span>
-                        of
                         <span class="font-semibold text-gray-900 dark:text-white"><?= $jumlahData ?></span>
+                        of
+                        <span class="font-semibold text-gray-900 dark:text-white"><?= $jumlahDataPerHalaman ?></span>
                     </span>
                     <ul class="inline-flex items-stretch -space-x-px">
 
